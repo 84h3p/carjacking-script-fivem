@@ -21,20 +21,21 @@ RegisterCommand('carjack', function(source, args)
     -- create the vehicle
     vehicle = CreateVehicle(vehicleName, streetName, true, false)
     SetVehicleDoorsLocked (vehicle, 2)
-    isVehicleDoorsOpen = false
-
-    TriggerEvent('chat:addMessage', {
-		args = {vehicle}
-	})
+    local plates = GetVehicleNumberPlateText(vehicle)
+    
     car = AddBlipForCoord(streetName)
 
     -- tell the player
     TriggerEvent('chat:addMessage', {
-		args = { 'Тебе нужно угнать ' .. vehicleName .. '. Привези мне его. Координаты скинул.'}
+		args = { 'Тебе нужно угнать ' .. vehicleName .. '. Привези мне его. Координаты скинул.' .. ' Номер: ' .. plates .. '.'}
 	})
 
     while GetVehiclePedIsIn(GetPlayerPed(-1), False) ~= vehicle do
         Citizen.Wait(1000)
+        distance = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), streetName, false)
+        if IsControlPressed(0, 206) and (distance < 5) then
+            SetDisplay(not display)
+        end
         if GetVehiclePedIsIn(GetPlayerPed(-1), False) == vehicle then
             RemoveBlip(car)
             TriggerEvent('chat:addMessage', {

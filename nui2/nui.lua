@@ -10,6 +10,14 @@ RegisterNUICallback("exit", function(data)
     SetDisplay(false)
 end)
 
+RegisterNUICallback("open", function(data)
+    chat("car opened", {0,255,0})
+    SetDisplay(false)
+    SetVehicleDoorsLocked (vehicle, 1)
+    SetVehicleAlarm(vehicle, true)
+    StartVehicleAlarm(vehicle)
+end)
+
 -- this cb is used as the main route to transfer data back 
 -- and also where we hanld the data sent from js
 RegisterNUICallback("main", function(data)

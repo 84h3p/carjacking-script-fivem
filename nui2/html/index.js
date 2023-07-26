@@ -26,8 +26,8 @@ $(function () {
             return
         }
     };
-    $("#close").click(function () {
-        $.post('http://carjacking/exit', JSON.stringify({}));
+    $("#open").click(function () {
+        $.post('http://carjacking/open', JSON.stringify({}));
         return
     })
     //when the user clicks on the submit button, it will run
