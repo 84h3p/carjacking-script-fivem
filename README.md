@@ -3,6 +3,7 @@
 ## Usage
 
 To start mission type /carjack
+
 To lockpick the car hold E near it
 
 ## TODO
