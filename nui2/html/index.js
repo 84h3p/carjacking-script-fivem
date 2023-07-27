@@ -20,7 +20,7 @@ $(function () {
               isPicking = false;
               if (unlocked) {
                 resultElement.textContent = "Замок открыт!";
-                $.post('http://carjacking/open', JSON.stringify({}));
+                $.post('http://carjacking-script-fivem/open', JSON.stringify({}));
                 return
               } else {
                 resultElement.textContent = "Отмычка вернулась назад.";
@@ -90,7 +90,7 @@ $(function () {
     // if the person uses the escape key, it will exit the resource
     document.onkeyup = function (data) {
         if (data.which == 27) {
-            $.post('http://carjacking/exit', JSON.stringify({}));
+            $.post('http://carjacking-script-fivem', JSON.stringify({}));
             return
         }
     };
