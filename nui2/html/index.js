@@ -42,8 +42,7 @@ $(function () {
                   pickElement.style.top = mouseY + "px";
                 }
           
-                // Проверяем, находится ли отмычка в зоне правильного взлома
-                const zoneWidth = 20; // Укажите ширину зоны правильного взлома (например, 20 пикселей)
+                const zoneWidth = 20; 
 
                 if (
                   mouseX >= targetX &&
