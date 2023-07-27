@@ -30,11 +30,12 @@ RegisterCommand('carjack', function(source, args)
 		args = { 'Тебе нужно угнать ' .. vehicleName .. '. Привези мне его. Координаты скинул.' .. ' Номер: ' .. plates .. '.'}
 	})
 
+
     while GetVehiclePedIsIn(GetPlayerPed(-1), False) ~= vehicle do
-        Citizen.Wait(1000)
+        Citizen.Wait(0)
         distance = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), streetName, false)
-        if IsControlPressed(0, 206) and (distance < 5) then
-            SetDisplay(not display)
+        if IsControlJustReleased(0, 206) and (distance < 5) then
+            SetDisplay(not display) 
         end
         if GetVehiclePedIsIn(GetPlayerPed(-1), False) == vehicle then
             RemoveBlip(car)
@@ -44,7 +45,8 @@ RegisterCommand('carjack', function(source, args)
             destinationList = {vector3(367.92, 335.42, 102.81), vector3(-10.26, -1082.36, 26.67)}
             destinationName = destinationList[math.random(#destinationList)]
             destinationBlip = AddBlipForCoord(destinationName)
-        end 
+        end
+        ::continue::
     end
 
 
