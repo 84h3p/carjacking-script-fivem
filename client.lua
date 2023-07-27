@@ -1,5 +1,5 @@
 carList = {'bullet', 'infernus', 'emperor', 'dominator', 'tornado', 'buffalo', 'penumbra'}
-streetList = {vector3(317.23, -206.43, 54.08), vector3(272.81, 66.97, 99.89), vector3(383.62, -767.88, 29.29)}
+streetList = {vector3(317.23, -206.43, 54.08), vector3(272.81, 66.97, 99.89), vector3(383.62, -767.88, 29.29), vector3(-255.17, -2655.86, 5.99)}
 destinationList = {vector3(367.92, 335.42, 102.81), vector3(-10.26, -1082.36, 26.67)}
 
 
@@ -54,7 +54,7 @@ RegisterCommand('carjack', function(source, args)
 
     while GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), destinationName, false) > 5 do
         Citizen.Wait(1000)
-        
+
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), destinationName, false) < 5 then
             TriggerEvent('chat:addMessage', {
                 args = { 'Круто, сдал тачку' }
