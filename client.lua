@@ -1,14 +1,17 @@
+carList = {'bullet', 'infernus', 'emperor', 'dominator', 'tornado', 'buffalo', 'penumbra'}
+streetList = {vector3(317.23, -206.43, 54.08), vector3(272.81, 66.97, 99.89), vector3(383.62, -767.88, 29.29)}
+destinationList = {vector3(367.92, 335.42, 102.81), vector3(-10.26, -1082.36, 26.67)}
+
+
 RegisterCommand('carjack', function(source, args)
 
     RemoveBlip(car)
     DeleteVehicle(vehicle)
 
-    -- random car list
-    carList = {'bullet', 'infernus', 'emperor', 'dominator', 'tornado', 'buffalo', 'penumbra'}
+    -- random car generation
     vehicleName = carList[math.random(#carList)]
 
     -- random street generation
-    streetList = {vector3(317.23, -206.43, 54.08), vector3(272.81, 66.97, 99.89), vector3(383.62, -767.88, 29.29)}
     streetName = streetList[math.random(#streetList)]
 
     RequestModel(vehicleName)
@@ -25,7 +28,6 @@ RegisterCommand('carjack', function(source, args)
     
     car = AddBlipForCoord(streetName)
 
-    -- tell the player
     TriggerEvent('chat:addMessage', {
 		args = { 'Тебе нужно угнать ' .. vehicleName .. '. Привези мне его. Координаты скинул.' .. ' Номер: ' .. plates .. '.'}
 	})
@@ -34,24 +36,25 @@ RegisterCommand('carjack', function(source, args)
     while GetVehiclePedIsIn(GetPlayerPed(-1), False) ~= vehicle do
         Citizen.Wait(0)
         distance = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), streetName, false)
+        
         if IsControlJustReleased(0, 206) and (distance < 5) then
             SetDisplay(not display) 
         end
+
         if GetVehiclePedIsIn(GetPlayerPed(-1), False) == vehicle then
             RemoveBlip(car)
             TriggerEvent('chat:addMessage', {
                 args = { 'Скидываю координаты' }
             })
-            destinationList = {vector3(367.92, 335.42, 102.81), vector3(-10.26, -1082.36, 26.67)}
             destinationName = destinationList[math.random(#destinationList)]
             destinationBlip = AddBlipForCoord(destinationName)
         end
-        ::continue::
     end
 
 
     while GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), destinationName, false) > 5 do
         Citizen.Wait(1000)
+        
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), destinationName, false) < 5 then
             TriggerEvent('chat:addMessage', {
                 args = { 'Круто, сдал тачку' }
