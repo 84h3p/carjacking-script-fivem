@@ -7,6 +7,7 @@ RegisterCommand('carjack', function(source, args)
 
     RemoveBlip(car)
     DeleteVehicle(vehicle)
+    RemoveBlip(destinationBlip)
 
     -- random car generation
     vehicleName = carList[math.random(#carList)]
@@ -29,7 +30,7 @@ RegisterCommand('carjack', function(source, args)
     car = AddBlipForCoord(streetName)
 
     TriggerEvent('chat:addMessage', {
-		args = { 'Тебе нужно угнать ' .. vehicleName .. '. Привези мне его. Координаты скинул.' .. ' Номер: ' .. plates .. '.'}
+		args = { 'Тебе нужно угнать ' .. vehicleName .. '. Привези мне его. Мне она нужна целой. Координаты скинул.' .. ' Номер: ' .. plates .. '.'}
 	})
 
 
@@ -55,6 +56,18 @@ RegisterCommand('carjack', function(source, args)
     while GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), destinationName, false) > 5 do
         Citizen.Wait(1000)
 
+        vehiclehealth = GetVehicleBodyHealth(vehicle)
+
+        if vehiclehealth < 900 then 
+            TriggerEvent('chat:addMessage', {
+                args = { 'Машина поцарапана. Миссия провалена.' }
+            })
+
+            RemoveBlip(destinationBlip)
+
+            goto after_lose
+        end
+        
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), destinationName, false) < 5 then
             TriggerEvent('chat:addMessage', {
                 args = { 'Круто, сдал тачку' }
@@ -62,6 +75,8 @@ RegisterCommand('carjack', function(source, args)
             RemoveBlip(destinationBlip)
         end 
     end
+
+    ::after_lose::
         -- give the vehicle back to the game (this'll make the game decide when to despawn the vehicle)
     SetEntityAsNoLongerNeeded(vehicle)
 
