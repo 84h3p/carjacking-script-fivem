@@ -67,4 +67,3 @@ function chat(str, color)
         }
     )
 end
-
