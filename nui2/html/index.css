@@ -9,7 +9,7 @@ body {
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE/Edge */
-    user-select: none; /* Общее свойство */
+    user-select: none; /* Common */
 }
 
 #container {
@@ -45,6 +45,10 @@ h1 {
     justify-content: center;
     align-items: center;
 }
+
+.pick.in-zone {
+    background-color: green; 
+  }
 
 .pick {
     width: 50px;
