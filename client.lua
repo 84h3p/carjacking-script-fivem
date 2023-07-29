@@ -31,7 +31,7 @@ RegisterCommand('carjack', function(source, args)
     SetVehicleHasBeenOwnedByPlayer(vehicle, true)
     SetEntitySomething(vehicle, true)
     SetNetworkIdExistsOnAllMachines(netID, true)
-    SetVehicleDoorsLocked (netID, 2)
+    SetVehicleDoorsLocked (vehicleID, 2)
     print(vehicleID)
     print(netID)
     lockpicked = false
