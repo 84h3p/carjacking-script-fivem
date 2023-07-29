@@ -2,7 +2,6 @@ local carList = {'bullet', 'infernus', 'emperor', 'dominator', 'tornado', 'buffa
 local streetList = {vector3(317.23, -206.43, 54.08)}
 local destinationList = {vector3(367.92, 335.42, 102.81), vector3(-10.26, -1082.36, 26.67), vector3(890.13, -1591.53, 30.19), vector3(1189.12, -1322.62, 34.97)}
 
-
 RegisterCommand('carjack', function(source, args)
 
     RemoveBlip(car)
@@ -91,6 +90,7 @@ RegisterCommand('carjack', function(source, args)
     TriggerEvent('chat:addMessage', {
         args = { 'Круто, сдал тачку' }
     })
+    
     RemoveBlip(destinationBlip)
 
     ::after_lose::
