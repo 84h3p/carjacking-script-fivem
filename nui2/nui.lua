@@ -13,9 +13,7 @@ end)
 RegisterNUICallback("open", function(data)
     chat("car opened", {0,255,0})
     SetDisplay(false)
-    SetVehicleDoorsLocked (vehicle, 1)
-    SetVehicleAlarm(vehicle, true)
-    StartVehicleAlarm(vehicle)
+    lockpicked = true
 end)
 
 -- this cb is used as the main route to transfer data back 
