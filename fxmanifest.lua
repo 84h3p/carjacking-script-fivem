@@ -6,6 +6,7 @@ version '1.0.2'
 
 client_scripts {
     'client.lua',
+    'getcoord.lua',
     'nui2/nui.lua'
 }
 
