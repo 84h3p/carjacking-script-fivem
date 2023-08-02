@@ -54,6 +54,11 @@ RegisterCommand('carjack', function(source, args)
         end
     end
 
+    -- play animation
+    RequestAnimDict("mp_arresting")
+    while (not HasAnimDictLoaded("mp_arresting")) do Citizen.Wait(0) end
+    TaskPlayAnim(GetPlayerPed(-1), "mp_arresting", "a_uncuff", 1.0 ,-1.0 , 5500, 0, 1, true, true, true)
+
     SetVehicleDoorsLocked (vehicleID, 1)
     SetVehicleAlarm(vehicleID, true)
     StartVehicleAlarm(vehicleID)
