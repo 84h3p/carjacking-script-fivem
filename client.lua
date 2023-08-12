@@ -8,19 +8,21 @@ RegisterCommand('carjack', function(source, args)
     DeleteVehicle(vehicle)
     RemoveBlip(destinationBlip)
 
-    -- random car generation
+    -- Select random car
     local vehicleName = carList[math.random(#carList)]
 
-    -- random street generation
+    -- Select random stree
     local streetName = streetList[math.random(#streetList)]
 
     RequestModel(vehicleName)
 
-    -- wait for the model to load
+    -- Load the model
     while not HasModelLoaded(vehicleName) do Citizen.Wait(500) end
 
-    -- create the vehicle
+    -- Create the vehicle
     local vehicle = CreateVehicle(vehicleName, streetName, true, true)
+
+    -- Vehicle settings
     local netID = VehToNet(vehicle)
     local vehicleID = NetToVeh(netID)
     SetNetworkIdCanMigrate(netID, true)
@@ -30,20 +32,17 @@ RegisterCommand('carjack', function(source, args)
     SetNetworkIdExistsOnAllMachines(netID, true)
     SetVehicleDoorsLocked (vehicleID, 2)
     SetVehicleNeedsToBeHotwired(vehicle, true)
-    print(vehicleID)
-    print(netID)
     lockpicked = false
-    
-
-    
     local plates = GetVehicleNumberPlateText(vehicle)
-    
+
+    -- Vehicle blip
     local car = AddBlipForCoord(streetName)
 
     TriggerEvent('chat:addMessage', {
 		args = { 'Тебе нужно угнать ' .. vehicleName .. '. Привези мне его. Мне она нужна целой. Координаты скинул.' .. ' Номер: ' .. plates .. '.'}
 	})
 
+    -- Waiting for lockpicking
     while lockpicked == false do
         Citizen.Wait(0)
             
@@ -54,7 +53,7 @@ RegisterCommand('carjack', function(source, args)
         end
     end
 
-    -- play animation
+    -- Play anim
     RequestAnimDict("mp_arresting")
     while (not HasAnimDictLoaded("mp_arresting")) do Citizen.Wait(0) end
     TaskPlayAnim(GetPlayerPed(-1), "mp_arresting", "a_uncuff", 1.0 ,-1.0 , 5500, 0, 1, true, true, true)
@@ -96,10 +95,10 @@ RegisterCommand('carjack', function(source, args)
     RemoveBlip(destinationBlip)
 
     ::after_lose::
-        -- give the vehicle back to the game (this'll make the game decide when to despawn the vehicle)
+        -- Despawn vehicle
     SetEntityAsNoLongerNeeded(vehicleID)
 
-        -- release the model
+        -- Release the model
     SetModelAsNoLongerNeeded(vehicleName)
 
 end, false)
